@@ -15,14 +15,24 @@ def promptEquation():
         if vector == "done": # if the user enters done, stop asking
             break
         if "@" in vector: # if the vector contains @, try and parse it as a magnitude and direction case
-            mag = float(vector.split("@")[0]) # the magnitude is the number before the @
-            dir = float(vector.split("@")[1]) # the direction is the number after the @
+            mag = 0
+            dir = 0
+            try:
+                mag = float(vector.split("@")[0]) # the magnitude is the number before the @
+                dir = float(vector.split("@")[1]) # the direction is the number after the @
+            except:
+                print("A component was entered incorrectly.")
+                continue
             x_comp = mag * math.cos(math.radians(dir)) # calculate the x component (r*cos(theta))
             y_comp = mag * math.sin(math.radians(dir)) # calculate the y component (r*sin(theta))
             vectors.append([x_comp, y_comp]) # add the vectors as a list to the vector list
         else: # otherwise its an x and y component separated by "+"
-            x = float(vector.split("+")[0]) # the x component of the vector
-            y = float(vector.split("+")[1]) # the y component of the vector
+            try:
+                x = float(vector.split("+")[0]) # the x component of the vector
+                y = float(vector.split("+")[1]) # the y component of the vector
+            except:
+                print("A component was entered incorrectly.")
+                continue
             vectors.append([x, y]) # add them as a list to the vector list
         i += 1 # next vector number
 
